@@ -1,4 +1,4 @@
 # Interest-calculating
 For my personal use
 
-view live at:- https://mthulasireddy.github.io/Interest-calculating/
+view live at:- https://interest-calculator-me.vercel.app/
