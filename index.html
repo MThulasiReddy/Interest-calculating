@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Interest Calculator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      color: #333;
+    }
+    .calculator {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      width: 350px;
+    }
+    .calculator h2 {
+      margin: 0 0 25px 0;
+      color: #333;
+      text-align: center;
+      font-size: 28px;
+      position: relative;
+    }
+    .calculator h2:after {
+      content: '';
+      position: absolute;
+      width: 70px;
+      height: 3px;
+      background: linear-gradient(to right, #2575fc, #6a11cb);
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+    .input-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #555;
+    }
+    input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #e1e1e1;
+      border-radius: 10px;
+      font-size: 16px;
+      transition: border-color 0.3s;
+      box-sizing: border-box;
+    }
+    input:focus {
+      outline: none;
+      border-color: #2575fc;
+      box-shadow: 0 0 0 3px rgba(37, 117, 252, 0.1);
+    }
+    input::placeholder {
+      color: #aaa;
+    }
+    button {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(to right, #2575fc, #6a11cb);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-top: 10px;
+    }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(106, 17, 203, 0.3);
+    }
+    button:active {
+      transform: translateY(0);
+    }
+    .output {
+      margin-top: 25px;
+      padding: 15px;
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      line-height: 1.6;
+      text-align: left;
+    }
+    .output div {
+      margin: 8px 0;
+    }
+    .output span {
+      font-weight: 600;
+      float: right;
+    }
+    .red-text {
+      color: #e74c3c;
+    }
+    .green-text {
+      color: #2ecc71;
+    }
+    .blue-text {
+      color: #2575fc;
+    }
+    .rate-info {
+      font-size: 14px;
+      color: #777;
+      text-align: center;
+      margin-top: 15px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <h2>Interest Calculator</h2>
+    
+    <div class="input-group">
+      <label for="amount">Loan Amount (₹)</label>
+      <input type="number" id="amount" placeholder="Enter principal amount" />
+    </div>
+    
+    <div class="input-group">
+      <label for="days">Loan Duration</label>
+      <input type="number" id="days" placeholder="Enter number of days" />
+    </div>
+    
+    <button onclick="calculate()">Calculate Interest</button>
+    
+    <div class="output" id="result">
+      <div>Interest: <span class="red-text">₹0.00</span></div>
+      <div>Total Repayment: <span class="green-text">₹0.00</span></div>
+    </div>
+    
+  </div>
+  
+  <script>
+    function calculate() {
+      const amount = parseFloat(document.getElementById("amount").value);
+      const days = parseInt(document.getElementById("days").value);
+      const ratePerDay = 2; // 2% per day
+      
+      if (isNaN(amount) || isNaN(days) || amount <= 0 || days <= 0) {
+        document.getElementById("result").innerHTML = "<div style='color:#e74c3c;text-align:center;'>Please enter valid values.</div>";
+        return;
+      }
+      
+      const interest = (amount * ratePerDay * days) / 100;
+      const total = amount + interest;
+      
+      document.getElementById("result").innerHTML = `
+        <div>Principal Amount: <span class="blue-text">₹${amount.toFixed(2)}</span></div>
+        <div>Interest Rate: <span class="blue-text">${ratePerDay}% per day</span></div>
+        <div>Duration: <span class="blue-text">${days} days</span></div>
+        <div>Interest Amount: <span class="red-text">₹${interest.toFixed(2)}</span></div>
+        <div style="margin-top:10px;padding-top:10px;border-top:1px solid #ddd;">
+          <strong>Total Repayment: <span class="green-text">₹${total.toFixed(2)}</span></strong>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
