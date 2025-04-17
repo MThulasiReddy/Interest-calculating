@@ -147,7 +147,7 @@
     function calculate() {
       const amount = parseFloat(document.getElementById("amount").value);
       const days = parseInt(document.getElementById("days").value);
-      const ratePerDay = 2; // 2% per day
+      const ratePerDay = 0.5; // 2% per day
       
       if (isNaN(amount) || isNaN(days) || amount <= 0 || days <= 0) {
         document.getElementById("result").innerHTML = "<div style='color:#e74c3c;text-align:center;'>Please enter valid values.</div>";
